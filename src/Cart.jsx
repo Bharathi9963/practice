@@ -11,7 +11,6 @@ function Shop(){
       });
         setproducts([...products])
         
-
       })
     },[])
    
@@ -27,12 +26,16 @@ function Shop(){
         setcart(temp)
     }
     function add(i){
-      
       var temp=[...cart]
-     
        temp[i].count--
-      
         setcart(temp)
+    }
+    function remove(b,ind){
+     var temp=[...cart]
+     temp.splice(ind,1)
+    
+     setcart(temp,ind)
+
     }
     return(
         <div className="d-flex flex-wrap">
@@ -61,21 +64,23 @@ function Shop(){
            </ul>
             </div>
             <div className='p-3'style={{width:'40%',border:'5px dashed black'}}>
+              <h1>Cart</h1>
                {
                
-                cart.length>0 && cart.map((b,ind)=>{
-                    return <div className="card shadow-lg p-3 mb-5 bg-white rounded m-2 bg-info-subtle text-emphasis-info " style={{width: '14rem'}}>
-                       <div className="card-body d-flex flex-column justify-content-between" >
-                      <img src={b.image} style={{height:'200px',width:'160px'}} alt="Card image cap"/>
+                  cart.length>0 && cart.map((b,ind)=>{
+                    return <div className="card shadow-lg p-3  bg-white rounded m-2 bg-info-subtle text-emphasis-info">
+                       <div className="card-body d-flex justify-content-between" >
+                      <center><img src={b.image} style={{height:'90px',width:'100px'}} alt="Card image cap"/></center>
                       <h5 className="card-title">{b.title}</h5>
-                      <p className="card-text">{b.price}</p>
-                      <div>
+                      <p className="card-text mb">{b.price}</p></div>
+                      <div style={{position:'absolute',bottom:'20px',left:'250px'}}>
                     <button className="btn btn-info" onClick={()=>{add(ind)}} disabled={b.count===1?true:false}>-</button>
                     <span>{b.count}</span>
                     <button className="btn btn-info" onClick={()=>{addto(ind)}}>+</button>
+                    <button className="btn btn-danger" style={{position:'absolute',left:'100px'}} onClick={()=>{remove(b,ind)}} >Remove</button>
 
                     </div>
-                    </div>
+                    
                     </div>
                 })
                }
