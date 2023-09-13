@@ -1,11 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+
+
+import { Provider } from 'react-redux'
+import Counter from './features/Counter';
+import { store } from './app/Store';
 
 function App() {
   return (
-    <div className="App">
+    <Provider store={store}>
+         <div style={{border:'2px solid'}}>
       <h1>Welcome</h1>
     </div>
+    <Counter></Counter>
+    </Provider>
+   
   );
 }
 
