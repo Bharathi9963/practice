@@ -1,16 +1,23 @@
 
-
 import { Provider } from 'react-redux'
 import Counter from './features/Counter';
 import { store } from './app/Store';
+import Countries from './features/Countries';
+import { createRoot } from "react-dom/client";
+import Header from './shared/Header';
+import { Outlet } from 'react-router-dom';
+import Show from './features/Show';
 
 function App() {
+ 
   return (
     <Provider store={store}>
-         <div style={{border:'2px solid'}}>
-      <h1>Welcome</h1>
+         <div>
+        
+      
     </div>
-    <Counter></Counter>
+    <Header></Header>
+    <Outlet></Outlet>
     </Provider>
    
   );
