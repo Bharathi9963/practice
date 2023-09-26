@@ -3,15 +3,56 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createRoot } from 'react-dom/client';
+import AdminDashBoard from './features/AdminDashboard/AdminDashBoard';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+import Home from './Home/Home';
+import AddHospital from './features/AdminDashboard/AddHospital';
+import AddBed from './features/AdminDashboard/AddBed';
+import HospitalDetails from './features/Hospital/Hospital Details';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App></App>,
+    children:[
+      {
+        path: "/AdminDashBoard",
+    element: <AdminDashBoard></AdminDashBoard>,
+    children:[
+      {
+      path:'/AdminDashBoard/addhospital',
+      element:<AddHospital></AddHospital>
+    },
+    {
+      path:'/AdminDashBoard/addBed',
+      element:<AddBed></AddBed>
+    }
+  ]
+
+      },
+      {
+        path: "/details/:id",
+        element: <HospitalDetails></HospitalDetails>,
+      },
+      {
+        path: "",
+    element: <Home></Home>,
+
+      },
+
+    ]
+  },
+ 
+]);
+
+createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
